@@ -49,13 +49,13 @@ async function startBot() {
 
             const statusCode = lastDisconnect?.error?.output?.statusCode //optionnel mais parlant
 
-            const reason = lastDisconnect?.error?.toString() || 'Unknow'// raison de déconnexion
+            const reason = lastDisconnect?.error?.toString() || 'Unknown'// raison de déconnexion
 
             console.log(`❌ Connexion fermée. raison: ${reason}, statuscode: ${statusCode} `)
             // on ne reconnecte que si on suppose que l'utilisateur a le client de son coté 
             // donc s'il n'a pas déconnecté l'appareil
             
-            const shouldReconnect = statusCode !== DisconnectReason.loggedOut && reason != "unknown"
+            const shouldReconnect = statusCode !== DisconnectReason.loggedOut && reason !== 'Unknown'
 
             if(shouldReconnect){
                  // relance automatique si la sesssion est la chez l'user faire une attente de 5s pour pas
@@ -85,7 +85,7 @@ async function startBot() {
             console.log(`entre ce code dans whatsapp pour pair ${pairingCode}`)       
 
         }
-    }, '5000')
+    }, 5000)
 
     return sock
 
